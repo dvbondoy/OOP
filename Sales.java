@@ -1,4 +1,4 @@
-class Sales {
+abstract class Sales {
     private String productName;
     private double price;
     private int quantity;
