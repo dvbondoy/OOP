@@ -1,12 +1,20 @@
-abstract class Sales {
+abstract class Product {
     private String productName;
     private double price;
     private int quantity;
+    private int duration;
 
-    public Sales(String productName, double price, int quantity) {
+    public Product(String productName, double price, int quantity) {
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public Product(String productName, double price, int quantity, int duration) {
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+        this.duration = duration;
     }
 
     public double calculateTotal() {
@@ -23,34 +31,41 @@ abstract class Sales {
     public String getProductName() {
         return productName;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
 }
 
-class Service extends Sales {
-    private int duration;
-    private double price;
-    private int quantity;
-
+class Service extends Product {
+    // private int duration;
+    
     public Service(String productName, double price, int quantity, int duration) {
-        super(productName, price, quantity);
-        this.duration = duration;
-        this.price = price;
-        this.quantity = quantity;
+        super(productName, price, quantity, duration);
     }
 
     public double calculateTotal() {
-        return price * quantity * duration;
+        return getPrice() * getQuantity() * getDuration();
     }
 
     public void displayInvoice() {
         System.out.println("Product: " + getProductName());
-        System.out.println("Price: $" + price);
-        System.out.println("Quantity: " + quantity);
-        System.out.println("Duration: " + duration + " hours");
+        System.out.println("Price: $" + getPrice());
+        System.out.println("Quantity: " + getQuantity());
+        System.out.println("Duration: " + getDuration() + " hours");
         System.out.println("Total: $" + calculateTotal());
     }
 }
 
-class Goods extends Sales {
+class Goods extends Product {
     public Goods(String productName, double price, int quantity) {
         super(productName, price, quantity);
     }
