@@ -3,6 +3,7 @@ abstract class Product {
     private double price;
     private int quantity;
     private int duration;
+    private String productType = "goods";
 
     public Product(String productName, double price, int quantity) {
         this.productName = productName;
@@ -15,17 +16,28 @@ abstract class Product {
         this.price = price;
         this.quantity = quantity;
         this.duration = duration;
+        this.productType = "service";
     }
 
     public double calculateTotal() {
-        return price * quantity;
+        if(productType.equals("service"))
+            return price * quantity * duration;
+        else if(productType.equals("goods"))
+            return price * quantity;
+        else
+            return 0;
+       
+        // return price * quantity;
     }
 
     public void displayInvoice() {
         System.out.println("Product: " + productName);
         System.out.println("Price: $" + price);
         System.out.println("Quantity: " + quantity);
-        System.out.println("Total: $" + calculateTotal());
+        if(productType.equals("service"))
+            System.out.println("Duration: " + duration + " hours");
+        else
+            System.out.println("Total: $" + calculateTotal());
     }
 
     public String getProductName() {
@@ -43,26 +55,30 @@ abstract class Product {
     public int getDuration() {
         return duration;
     }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
 }
 
 class Service extends Product {
-    // private int duration;
     
     public Service(String productName, double price, int quantity, int duration) {
         super(productName, price, quantity, duration);
+        // setProductType("service");
     }
 
-    public double calculateTotal() {
-        return getPrice() * getQuantity() * getDuration();
-    }
+    // public double calculateTotal() {
+    //     return getPrice() * getQuantity() * getDuration();
+    // }
 
-    public void displayInvoice() {
-        System.out.println("Product: " + getProductName());
-        System.out.println("Price: $" + getPrice());
-        System.out.println("Quantity: " + getQuantity());
-        System.out.println("Duration: " + getDuration() + " hours");
-        System.out.println("Total: $" + calculateTotal());
-    }
+    // public void displayInvoice() {
+    //     System.out.println("Product: " + getProductName());
+    //     System.out.println("Price: $" + getPrice());
+    //     System.out.println("Quantity: " + getQuantity());
+    //     System.out.println("Duration: " + getDuration() + " hours");
+    //     System.out.println("Total: $" + calculateTotal());
+    // }
 }
 
 class Goods extends Product {
