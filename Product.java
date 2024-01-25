@@ -34,6 +34,7 @@ abstract class Product {
         System.out.println("Product: " + productName);
         System.out.println("Price: $" + price);
         System.out.println("Quantity: " + quantity);
+        
         if(productType.equals("service"))
             System.out.println("Duration: " + duration + " hours");
         else
